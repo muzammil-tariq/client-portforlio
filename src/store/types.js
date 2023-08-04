@@ -1,0 +1,4 @@
+const CONSTANT = {
+    MOBILEDVELOPMENT: "MOBILEDVELOPMENT"
+}
+export default CONSTANT 

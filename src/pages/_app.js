@@ -2,9 +2,12 @@
 import Head from "next/head";
 import "../styles/globalstyle.scss"
 import Toast from "@/Component/Toast/Toast";
-export default function App({ Component, pageProps }) {
+import { store, wrapper } from "@/store/store";
+import { Provider } from "react-redux";
+function App({ Component, pageProps }) {
   return (
     <>
+    <Provider store={store}>
       <Head>
         <title>TECH SOLUTIONS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,6 +19,8 @@ export default function App({ Component, pageProps }) {
       />
 
       <Component {...pageProps} />
+      </Provider>
     </>
   );
 }
+export default wrapper.withRedux(App)

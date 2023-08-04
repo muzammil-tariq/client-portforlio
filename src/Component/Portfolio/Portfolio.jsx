@@ -71,6 +71,7 @@ const Portfolio = () => {
               return (
                 <div onClick={() => handlePortfolio(ind)} key={ind}>
                   <PortfolioCard
+                  showtittle
                     tittle={item.tittle}
                     year={item.year}
                     image={item.image}
@@ -84,6 +85,7 @@ const Portfolio = () => {
               return (
                 <div onClick={() => handlePortfolio(ind+2)} key={ind}>
                   <PortfolioCard
+                  showtittle
                     tittle={item.tittle}
                     year={item.year}
                     image={item.image}

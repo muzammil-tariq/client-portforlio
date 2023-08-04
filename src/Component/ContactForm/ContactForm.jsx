@@ -78,8 +78,8 @@ const ContactForm = () => {
           message: "",
         });
 
-        console.log("err", err.response.data.message);
-        if (err.response.data.message) {
+        
+        if (err?.response?.data?.message) {
           toast.error(err.response.data.message, {
             position: "top-right",
             autoClose: 1200,

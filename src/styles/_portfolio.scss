@@ -2,8 +2,7 @@
 .portfolioContainer {
   padding: 113px 0px 20px 0px;
   @include mobile {
-  padding: 70px 0px 20px 0px;
-
+    padding: 70px 0px 20px 0px;
   }
 }
 .portfolio-btn-wrapper {
@@ -26,25 +25,35 @@
   }
   // flex-wrap: wrap;
 }
-.prot-row-spacing{
+.prot-row-spacing {
   margin-top: 41px;
   @include laptops {
-  margin-top: 29px;
-    
+    margin-top: 29px;
   }
 }
-.portfiolio-card-box{
+.portfiolio-card-box {
   padding: 91px 0px 132px 0px;
   @include mobile {
     padding: 53px 0px 62px 0px;
   }
-
 }
 .portfolioCard {
   background-color: $darkblue;
   padding: 22px;
   width: max-content;
   border-radius: 12px;
+  .thumbContainer{
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+  .infoContainer{
+    display: flex;
+    justify-content: space-between;
+    // width: 100%;
+    align-items: center;
+    gap: 10px;
+  }
   @include mobile {
     width: 100%;
   }
@@ -53,12 +62,13 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 23px;
-    
-    
+    h4{
+      margin-bottom: 0px !important;
+    }
   }
-  img {
+  .portfolioImg {
     width: 541px;
-    
+
     height: 392px;
     border-radius: 10px;
     object-fit: cover;
