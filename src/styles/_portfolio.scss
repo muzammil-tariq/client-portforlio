@@ -53,12 +53,16 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 23px;
+    
+    
   }
   img {
     width: 541px;
+    
     height: 392px;
     border-radius: 10px;
     object-fit: cover;
+    cursor: pointer;
     @include largeScreen {
       width: 438px;
       height: 326px;

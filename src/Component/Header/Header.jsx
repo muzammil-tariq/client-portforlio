@@ -13,8 +13,21 @@ import { RiMenu3Line } from "react-icons/ri";
 import { useRouter } from "next/router";
 import { RxCross2 } from "react-icons/rx";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import whatsapp from "@/assets/images/whatsapp.svg";
+import { BsWhatsapp } from "react-icons/bs";
+
 function Header() {
+  const phoneNumber = "03056256473";
+  const message = "Hello, ";
+
+  // Construct the WhatsApp URL
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+    message
+  )}`;
   const router = useRouter();
+  const [currentIndex, setcurrentIndex] = useState(0);
+  console.log(router);
   const navigation = [
     {
       name: "Home",
@@ -22,26 +35,27 @@ function Header() {
     },
     {
       name: "services",
-      path: "/services",
+      path: "/#services",
     },
     {
       name: "Portfolio",
-      path: "/Portfolio",
+      path: "/#portfolio",
     },
     {
       name: "Expertise",
-      path: "/Expertise",
+      path: "/#Expertise",
     },
     {
       name: "contact",
-      path: "/contact",
+      path: "/#contact",
     },
   ];
   return (
     <>
       <Navbar
         expand={"lg"}
-        className="p-0   bg-body-tertiary  bg-blue headdercontainer "
+        className="p-0   bg-body-tertiary  bg-blue headdercontainer  "
+        sticky="top"
       >
         <Container className="container-padding">
           <Navbar.Brand className="p-0" href="#">
@@ -67,12 +81,16 @@ function Header() {
                 {navigation.map((item, ind) => {
                   return (
                     <Nav.Link
+                      onClick={() => setcurrentIndex(ind)}
+                      className={` header-link ${
+                        ind == currentIndex ? "active" : ""
+                      }`}
                       key={ind}
-                      className={`${
-                        router.pathname == item.path
-                          ? " header-link active-nav-link"
-                          : "header-link"
-                      }  `}
+                      // className={`${
+                      //   router.pathname == item.path
+                      //     ? " header-link active-nav-link"
+                      //     : "header-link"
+                      // }  `}
                       href={item.path}
                     >
                       {item.name}
@@ -81,8 +99,9 @@ function Header() {
                 })}
               </Nav>
               <div className="header-search-box ">
-                <button className="searchbtn">
-                  <FiSearch
+                {/* <img src={whatsapp.src} style={{width:'37px'}} alt="" /> */}
+                <button onClick={()=>router.push(whatsappURL)} className="searchbtn">
+                  <BsWhatsapp
                     style={{
                       fontSize: "23px",
                       color: "#fff",

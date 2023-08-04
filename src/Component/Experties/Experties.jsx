@@ -8,7 +8,7 @@ const Experties = () => {
   const ref = useRef();
   
   return (
-    <div className="bg-darkblue">
+    <div id="Expertise" className="bg-darkblue">
       <div className="container expertiesContainer container-padding">
         <div>
           <TopHeading

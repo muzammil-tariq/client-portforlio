@@ -23,23 +23,23 @@ const ServicesSlides = () => {
                 ease: "linear",
               }}
             >
-              <div className="sliderWapper" style={{transform:" rotate(1deg)"}}>
+              <div className="sliderWapper" >
                 <h1 className="heading2"> Web Development</h1>
                 <img src={star.src} />
-                <h1 className="heading2"> Digital Marketing</h1>
+                <h1 className="heading2"> Mobile App Development</h1>
                 <img src={star.src} />
                 <h1 className="heading2"> Product Design</h1>
                 <img src={star.src} />
                 <h1 className="heading2"> UI-UX Experience</h1>
                 <img src={star.src} />
               </div>
-              <div className="sliderWapper"   style={{transform:" rotate(0deg)"}}>
+              <div className="sliderWapper"   >
                 <h1 className="heading2" style={{ marginLeft: "130px" }}>
                   {" "}
                   Web Development
                 </h1>
                 <img src={star.src} />
-                <h1 className="heading2"> Digital Marketing</h1>
+                <h1 className="heading2"> Mobile App Development</h1>
                 <img src={star.src} />
                 <h1 className="heading2"> Product Design</h1>
                 <img src={star.src} />

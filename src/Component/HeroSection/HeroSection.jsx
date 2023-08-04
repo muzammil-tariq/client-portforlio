@@ -1,10 +1,11 @@
 import React from "react";
 import hero from "../../assets/images/hero.svg";
-import profile1 from "../../assets/images/profile1.svg";
+import profile1 from "../../assets/images/client.svg";
 import profile3 from "../../assets/images/profile3.svg";
 import { motion } from "framer-motion";
 import profile2 from "../../assets/images/profile2.svg";
 import realProjects from "../../assets/images/realProjects.svg";
+import Link from "next/link";
 const HeroSection = () => {
   return (
     <>
@@ -45,7 +46,7 @@ const HeroSection = () => {
                 type: "easeIn",
                 delay: 0.7,
               }}
-              className="btn1"
+              className="btn1 hoverglow"
             >
               Lets Talk
             </motion.button>
@@ -66,7 +67,7 @@ const HeroSection = () => {
               </div>
               <div className="position-relative ">
                 <p className="p1 text-white">200+ Projects</p>
-                <p className="smalltext ">Read testimonial</p>
+                <p className="smalltext texthoverglow" > <Link href={"/#testmonial"}> Read testimonial </Link></p>
                 <img src={realProjects.src} className="real-project" alt="" />
               </div>
             </motion.div>

@@ -22,10 +22,16 @@ const PortfolioCard = ({ bluecolor, tittle, year, image }) => {
         type: "spring",
         // staggerChildren: 0.5
       }}
-      
       className={`portfolioCard ${bluecolor}`}
     >
-      <img src={image.src} alt="" />
+      <div style={{ overflow: "hidden", borderRadius:"14px" }}>
+        <motion.img
+          whileHover={{ scale: 1.1 }} // Scale to 1.2 on hover
+          transition={{ duration: 0.3, ease: "easeInOut" }} // Animation duration and easing
+          src={image.src}
+          alt=""
+        />
+      </div>
       <div className="portfolioCardWrapper">
         <h4 className="heading4"> {tittle}</h4>
         <p className="p2">{year}</p>

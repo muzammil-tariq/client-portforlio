@@ -31,14 +31,12 @@ const Testimonial = () => {
         breakpoint: 1200,
         settings: {
           slidesToShow: 2,
-        
         },
       },
       {
         breakpoint: 786,
         settings: {
           slidesToShow: 1,
-       
         },
       },
     ],
@@ -83,7 +81,7 @@ const Testimonial = () => {
     },
   ];
   return (
-    <div>
+    <div id="testmonial">
       <TopHeading
         elementRef={ref}
         tittle={"Trusted by    "}
@@ -117,9 +115,13 @@ const Testimonial = () => {
           </Slider>
         </motion.div>
         <div className="arrowBox">
-          <img onClick={handlePrev} src={leftArrow.src} alt="" />
+          <button onClick={handlePrev} className="outlinebtn1">
+            <img  src={leftArrow.src} alt="" />
+          </button>
           <p className="p3">3/6</p>
-          <img onClick={handleNext} src={rightArrow.src} alt="" />
+          <button onClick={handleNext} className="outlinebtn1">
+            <img  src={rightArrow.src} alt="" />
+          </button>
         </div>
       </div>
     </div>

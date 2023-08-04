@@ -58,7 +58,7 @@ const Services = () => {
   //   console.log("isInview", isInview);
   // }, [isInview]);
   return (
-    <div className="bg-darkblue ">
+    <div id="services" className="bg-darkblue ">
       <div className="container  serviceswrapper container-padding">
         <TopHeading
           elementRef={ref}

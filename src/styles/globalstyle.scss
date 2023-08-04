@@ -87,6 +87,7 @@ p {
     width: 20%;
   }
 }
+
 .active-nav-link::after {
   transform: scaleX(1);
 }
@@ -116,12 +117,20 @@ p {
   font-weight: 400;
   border: 1px solid $borderColor2 !important;
   color: $white;
+  transition: 0.5s;
+}
+.outlinebtn1:hover {
+  background-color: $red;
+}
+.hoverglow:hover {
+  box-shadow: 0 0 20px rgba(255, 66, 55, 0.5);
 }
 .btn4 {
   @include btn(12px, 301px, 54px, $red);
   color: $white;
   font-family: "Sora", sans-serif;
   font-weight: 500;
+  transition: 0.4s ease-in-out;
 }
 // .btn3{
 //   @include btn(100px, auto, 38px, transparent);
@@ -321,6 +330,7 @@ p {
   background-color: $red;
 }
 .btn1 {
+  transition: 0.4s ease-in-out;
   @include btn(12px, 111px, 37px, $red);
   color: $white;
   font-size: 15px;
@@ -362,7 +372,13 @@ p {
   font-size: 12px;
   line-height: 15px;
   font-weight: 300 !important;
+  transition: 0.2s ease-in-out;
+  a{
+    text-decoration: none;
+    color: $red;
+  }
 }
+
 .inputStyle {
   border: 1px solid $borderColor;
   border-radius: 12px;

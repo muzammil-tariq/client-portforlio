@@ -4,7 +4,7 @@
   width: 100px;
   height: auto;
   @include tablet {
-margin-left: 15px;
+    margin-left: 15px;
   }
 }
 
@@ -22,6 +22,12 @@ margin-left: 15px;
 .nav-link-wrapper {
   gap: 18px;
   padding: 27px 0px;
+  .active {
+    color: $white !important;
+  }
+  .active::after {
+    transform: scaleX(1) !important;
+  }
 }
 .headdercontainer {
   border-bottom: 1px solid $lightgary;

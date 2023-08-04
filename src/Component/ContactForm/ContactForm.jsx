@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TopHeading from "../TopHeading/TopHeading";
 import waqas from "@/assets/images/waqas.svg";
 import whatsapp from "@/assets/images/whatsapp.svg";
@@ -10,10 +10,22 @@ import Link from "next/link";
 import logo from "@/assets/images/logo.png";
 import useInViewAnimation from "@/Hooks/useInViewAnimation";
 import { motion, useAnimation, useInView } from "framer-motion";
+import axios from "axios";
+import BASE_URL from "@/url";
+import { contact } from "@/endPoints";
+import { toast } from "react-toastify";
+import Loader from "../Loader/Loader";
 
 const ContactForm = () => {
   const ref = useRef();
   const { elementRef, mainControls } = useInViewAnimation();
+  const [loading, setloading] = useState(false);
+  const [State, setState] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
 
   const conatactRef = useRef();
   const isInview = useInView(conatactRef);
@@ -25,8 +37,64 @@ const ContactForm = () => {
       contactControls.start("hidden");
     }
   }, [isInview]);
+  const handleSend = () => {
+    setloading(true);
+    axios({
+      url: `${BASE_URL}${contact}`,
+      method: "post",
+      data: {
+        ...State,
+      },
+    })
+      .then((res) => {
+        setloading(false);
+        setState({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+
+        console.log("res", res);
+        if (res.data) {
+          toast.success(`message sent successfully`, {
+            position: "top-right",
+            autoClose: 1200,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      })
+      .catch((err) => {
+        setloading(false);
+        setState({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+
+        console.log("err", err.response.data.message);
+        if (err.response.data.message) {
+          toast.error(err.response.data.message, {
+            position: "top-right",
+            autoClose: 1200,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      });
+  };
   return (
-    <div className="bg-blue">
+    <div id="contact" className="bg-blue">
       <div className="container container-padding contactFormBox">
         <TopHeading
           elementRef={ref}
@@ -64,6 +132,10 @@ const ContactForm = () => {
             <img src={waqas.src} alt="" />
             <h6 className="heading5 text-white profile-text">Waqas Abbas</h6>
 
+            <div className="dot-container">
+              <div className="dot"></div>
+              <p className="p1"> connect with our lead today</p>
+            </div>
             <div className="contact-icon">
               <Link href={"/"}>
                 <img src={whatsapp.src} alt="" />
@@ -78,28 +150,80 @@ const ContactForm = () => {
                 <img src={facebook.src} alt="" />
               </Link>
             </div>
-            <button className="btn4">
+            <button className="btn4 hoverglow">
               Book a free call <img src={arrowright.src} alt="" />{" "}
             </button>
           </div>
           <div className="input-wrapper">
             <div className="inputWerapper">
-              <input type="text" placeholder="Name" className="inputStyle" />
-              <input type="email" placeholder="Email" className="inputStyle" />
+              <input
+                value={State.name}
+                onChange={(e) =>
+                  setState((prev) => {
+                    return {
+                      ...prev,
+                      name: e.target.value,
+                    };
+                  })
+                }
+                type="text"
+                placeholder="Name"
+                className="inputStyle"
+              />
+              <input
+                value={State.email}
+                onChange={(e) =>
+                  setState((prev) => {
+                    return {
+                      ...prev,
+                      email: e.target.value,
+                    };
+                  })
+                }
+                type="email"
+                placeholder="Email"
+                className="inputStyle"
+              />
             </div>
-            <input type="text" placeholder="Subject" className="inputStyle" />
+            <input
+              type="text"
+              value={State.subject}
+              onChange={(e) =>
+                setState((prev) => {
+                  return {
+                    ...prev,
+                    subject: e.target.value,
+                  };
+                })
+              }
+              placeholder="Subject"
+              className="inputStyle"
+            />
             <textarea
+              value={State.message}
+              onChange={(e) =>
+                setState((prev) => {
+                  return {
+                    ...prev,
+                    message: e.target.value,
+                  };
+                })
+              }
               placeholder="Message"
               className="inputStyle height  "
             ></textarea>
-            <button className="outlinebtn1">Lets Talk</button>
+            <button className="outlinebtn1" onClick={handleSend}>
+              {loading ? <Loader /> : "Lets Talk"}
+            </button>
           </div>
         </motion.div>
       </div>
 
       <div className="footer">
         <img src={logo.src} />
-        <p className="p1">© 2023 Geekfolio is Proudly Powered by Ui-ThemeZ</p>
+        <p className="p1">
+          © 2023 TxLabz LLC All right reserved DevPixelSolutions
+        </p>
       </div>
     </div>
   );

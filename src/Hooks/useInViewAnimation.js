@@ -12,9 +12,9 @@ const useInViewAnimation = () => {
         if (isInView) {
             mainControls.start("visible");
         } 
-        // else {
-        //     mainControls.start("hidden");
-        // }
+        else {
+            mainControls.start("hidden");
+        }
     }, [isInView, mainControls]);
 
     return { elementRef, mainControls };
