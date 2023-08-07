@@ -60,6 +60,19 @@
   align-items: center;
   flex-direction: column;
   border-radius: 100px;
+  .icon-wrapper {
+    width: 62px;
+    height: 63px;
+    position: relative;
+    // border: 1px solid red;
+    
+    img {
+      position: absolute;
+      left: 0px ;
+      bottom: 0px;
+      width: 100%;
+    }
+  }
   img {
     width: 60px;
   }
@@ -67,6 +80,7 @@
   p {
     font-size: 14px;
     margin-top: 22px;
+    text-transform: capitalize !important;
   }
 
   @include medium {
@@ -88,8 +102,7 @@
   padding: 53px 0px 139px 0px;
   @include mobile {
     justify-content: center;
-  padding: 53px 0px 79px 0px;
-
+    padding: 53px 0px 79px 0px;
   }
   flex-wrap: wrap;
 }
@@ -104,6 +117,13 @@
   padding: 35px 31px 35px 31px;
   //   width: max-content;
   border-radius: 20px !important;
+  min-height: 327px;
+  .userPic {
+    width: 52px;
+    height: 52px;
+    border-radius: 100px;
+    object-fit: cover;
+  }
   .reviewCardHeader {
     display: flex;
     align-items: center;
@@ -174,7 +194,7 @@
     gap: 29px;
     margin-top: 47px;
     margin-left: 10px;
-    button{
+    button {
       width: 56px;
       height: 56px;
       border-radius: 100px;

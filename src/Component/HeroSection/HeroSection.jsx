@@ -36,7 +36,7 @@ const HeroSection = () => {
             >
               We specialize in designing and developing all things digital, from
               custom websites to mobile apps and more, with a focus on
-              supporting startups
+              supporting startups.
             </motion.p>
             <motion.button
               initial={{ opacity: 0 }} // Initial opacity set to 0 and y-position set to 50px (downwards)

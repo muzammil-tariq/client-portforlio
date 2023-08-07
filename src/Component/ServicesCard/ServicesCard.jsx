@@ -1,12 +1,15 @@
 import useInViewAnimation from "@/Hooks/useInViewAnimation";
 import React from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
+import { useRouter } from "next/router";
 
 const ServicesCard = ({ name, content, icon }) => {
+  const router = useRouter()
   const { elementRef, mainControls } = useInViewAnimation();
 
   return (
     <motion.div
+    onClick={()=>router.push(`/#portfolio`)}
       ref={elementRef}
       variants={{
         hidden: { opacity: 0 },

@@ -28,7 +28,7 @@ const ServicesSlides = () => {
                 <img src={star.src} />
                 <h1 className="heading2"> Mobile App Development</h1>
                 <img src={star.src} />
-                <h1 className="heading2"> Product Design</h1>
+                <h1 className="heading2"> Presentation Design</h1>
                 <img src={star.src} />
                 <h1 className="heading2"> UI-UX Experience</h1>
                 <img src={star.src} />
@@ -41,7 +41,7 @@ const ServicesSlides = () => {
                 <img src={star.src} />
                 <h1 className="heading2"> Mobile App Development</h1>
                 <img src={star.src} />
-                <h1 className="heading2"> Product Design</h1>
+                <h1 className="heading2"> Presentation Design</h1>
                 <img src={star.src} />
                 <h1 className="heading2"> UI-UX Experience</h1>
                 <img src={star.src} />

@@ -9,10 +9,24 @@ import uiux from "@/assets/images/uiux.svg";
 import { motion } from "framer-motion";
 import useInViewAnimation from "@/Hooks/useInViewAnimation";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Selected,
+  mobileDispatch,
+  presentationDispatch,
+  uiuxDispatch,
+  websiteDev,
+} from "@/store/action";
 
 const Portfolio = () => {
+  const uiuxState = useSelector((state) => state && state.uiuxDesign.uiux);
+  const selecteSate = useSelector(
+    (state) => state && state.selectedReducer.selected
+  );
+  console.log("selecteSate", selecteSate);
   const ref = useRef();
   const router = useRouter();
+  const dispatch = useDispatch();
   const cardRef = useRef();
 
   const portfolio = [
@@ -38,16 +52,23 @@ const Portfolio = () => {
     },
   ];
   const handlePortfolio = (ind) => {
-    if (ind == 0) {
+    if (ind == "Mobile app development") {
       router.push(`/mobile-development`);
-    } else if (ind == 1) {
+    } else if (ind == "UI/UX Design") {
       router.push(`/ui-ux`);
-    } else if (ind == 2) {
+    } else if (ind == "Website Development ") {
       router.push(`/website-development`);
-    } else if (ind == 3) {
+    } else if (ind == "Presentations Design") {
       router.push(`/presentation-design`);
     }
   };
+
+  useEffect(() => {
+    dispatch(Selected());
+  }, []);
+  const itemsPerRow = 2;
+  const numRows = Math.ceil(selecteSate?.length / itemsPerRow);
+
   return (
     <div id="portfolio" className="bg-blue">
       <div className="container portfolioContainer container-padding">
@@ -66,34 +87,30 @@ const Portfolio = () => {
           </button> */}
         </div>
         <div className="portfiolio-card-box">
-          <div className="portfolio-row">
-            {portfolio.slice(0, 2).map((item, ind) => {
-              return (
-                <div onClick={() => handlePortfolio(ind)} key={ind}>
-                  <PortfolioCard
-                  showtittle
-                    tittle={item.tittle}
-                    year={item.year}
-                    image={item.image}
-                  />
-                </div>
-              );
-            })}
-          </div>
-          <div className="portfolio-row prot-row-spacing">
-            {portfolio.slice(2, 4).map((item, ind) => {
-              return (
-                <div onClick={() => handlePortfolio(ind+2)} key={ind}>
-                  <PortfolioCard
-                  showtittle
-                    tittle={item.tittle}
-                    year={item.year}
-                    image={item.image}
-                  />
-                </div>
-              );
-            })}
-          </div>
+          {Array.from({ length: numRows }, (_, rowIndex) => (
+            <div className="portfolio-row" key={rowIndex}>
+              {selecteSate &&
+                selecteSate
+                  .slice(rowIndex * itemsPerRow, (rowIndex + 1) * itemsPerRow)
+                  .map((item, ind) => (
+                    <div
+                      onClick={() => handlePortfolio(item.portfolioType)}
+                      key={ind}
+                      className="portfolio-card"
+                    >
+                      <PortfolioCard
+                        showtittle
+                        likeCount={item.likeCount ?? 0}
+                        views={item.views ?? 0}
+                        bluecolor={"bg-blue"}
+                        tittle={item.portfolioType}
+                        year={item.year}
+                        image={item.webImage ? item.webImage : item.appImage}
+                      />
+                    </div>
+                  ))}
+            </div>
+          ))}
         </div>
       </div>
     </div>

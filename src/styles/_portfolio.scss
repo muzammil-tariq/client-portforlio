@@ -15,9 +15,12 @@
   display: flex;
   gap: 41px;
   align-items: center;
+  margin-bottom:41px;
   justify-content: center;
   @include laptops {
     gap: 29px;
+  margin-bottom:29px;
+
   }
   @include medium {
     // gap: 29px;

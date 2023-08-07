@@ -9,6 +9,8 @@
 @import "experties";
 @import "contactFrom";
 @import "mobiledevelopment";
+@import "admin";
+
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
@@ -35,8 +37,12 @@
     padding-right: 10px !important;
   }
 }
+.full-hig{
+  height: 100vh;
+}
 body {
   overflow-x: hidden !important;
+  background-color: $darkblue;
 }
 p {
   margin-bottom: 0px !important;
@@ -63,7 +69,10 @@ p {
   font-size: 16px;
   line-height: 24px;
   color: $white;
+  text-decoration: none !important;
   font-weight: 400;
+  padding: 5px 14px  !important;
+  cursor: pointer ;
   position: relative;
 }
 .header-link:hover {
@@ -77,7 +86,7 @@ p {
   transform: scaleX(0);
   height: 3px;
   border-radius: 5px;
-  top: 45px;
+  top: 41px;
 
   left: 0;
   background-color: $red;
@@ -87,8 +96,12 @@ p {
     width: 20%;
   }
 }
+// .active-nav-link{
+//   color: red !important;
 
+// }
 .active-nav-link::after {
+  
   transform: scaleX(1);
 }
 
@@ -400,4 +413,11 @@ p {
   @include medium {
     margin-top: 40px;
   }
+}
+
+.elisp-text{
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

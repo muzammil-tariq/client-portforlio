@@ -43,20 +43,7 @@ const Services = () => {
       setsmallScreen(true);
     }
   }, []);
-  console.log("smallScreen", smallScreen);
 
-  // const isInview = useInView(cardRef);
-  // const mainControls = useAnimation();
-  // useEffect(() => {
-  //   if (isInview) {
-  //     mainControls.start("visible");
-  //   }
-  //   // else {
-  //   //   mainControls.start("hidden");
-  //   // }
-
-  //   console.log("isInview", isInview);
-  // }, [isInview]);
   return (
     <div id="services" className="bg-darkblue ">
       <div className="container  serviceswrapper container-padding">
@@ -71,21 +58,7 @@ const Services = () => {
           <div className="services-cardrow">
             {servicesdata.slice(0, 2).map((item, ind) => {
               return (
-                <motion.div
-                  // ref={elementRef}
-                  // variants={{
-                  //   hidden: { opacity: 0 },
-                  //   visible: { opacity: 1 },
-                  // }}
-                  // initial={"hidden"}
-                  // animate={mainControls}
-                  // transition={{
-                  //   duration: smallScreen ? 1.5 : 3,
-                  //   delay: smallScreen ? 0 : 0.2 * ind,
-                  //   type: "spring",
-                  // }}
-                  key={ind}
-                >
+                <motion.div key={ind}>
                   <ServicesCard
                     name={item.name}
                     content={item.content}
@@ -98,21 +71,7 @@ const Services = () => {
           <div className="services-cardrow services-cardrow2  ">
             {servicesdata.slice(2, 4).map((item, ind) => {
               return (
-                <motion.div
-                  // ref={elementRef}
-                  // variants={{
-                  //   hidden: { opacity: 0 },
-                  //   visible: { opacity: 1 },
-                  // }}
-                  // initial={"hidden"}
-                  // animate={mainControls}
-                  // transition={{
-                  //   duration: smallScreen ? 1.5 : 3,
-                  //   delay: smallScreen ? 0 : 0.2 * ind,
-                  //   type: "spring",
-                  // }}
-                  key={ind}
-                >
+                <motion.div key={ind}>
                   <ServicesCard
                     name={item.name}
                     content={item.content}

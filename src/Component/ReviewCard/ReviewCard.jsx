@@ -1,35 +1,46 @@
 import React from "react";
 import flag from "@/assets/images/flag.svg";
-import { AiFillStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
-const ReviewCard = ({ userPic }) => {
+const ReviewCard = ({ userPic, name, county, countyPic, review, star }) => {
+  console.log("star", star);
+  const maxRating = 5;
+  const filledStars = star > 5 ? 5 : star;
+  const unfilledStars = maxRating - filledStars;
   return (
     <div className="reviewCard">
       <div className="reviewCardHeader">
         <div>
-          <img src={userPic.src} alt="" />
+          <img className="userPic" src={userPic} alt="" />
         </div>
         <div>
-          <p className="p1">Pegasuseagel</p>
+          <p className="p1 elisp-text" style={{ width: "121px" }}>
+            {name}
+          </p>
           <div className=" flagName">
             {" "}
-            <img src={flag.src} alt="" />
-            <p className="p2">Garmany</p>
+            <img src={countyPic} alt="" />
+            <p className="p2">{county}</p>
           </div>
         </div>
         <div className="starBox">
-          <AiFillStar className="red-color" style={{ fontSize: "20px" }} />
-          <AiFillStar className="red-color" style={{ fontSize: "20px" }} />
-          <AiFillStar className="red-color" style={{ fontSize: "20px" }} />
-          <AiFillStar className="red-color" style={{ fontSize: "20px" }} />
-          <AiFillStar className="red-color" style={{ fontSize: "20px" }} />
+          {[...Array(filledStars)].map((_, index) => (
+            <AiFillStar
+              key={index}
+              className="red-color"
+              style={{ fontSize: "20px" }}
+            />
+          ))}
+          {[...Array(unfilledStars)].map((_, index) => (
+            <AiOutlineStar
+              key={index}
+              className="red-color"
+              style={{ fontSize: "20px" }}
+            />
+          ))}
         </div>
       </div>
-      <p className="p1 clientreview">
-        Hi skill are from another planet, his hands are blessed by god. Highly
-        recommended when it comes to power point. There is litteraly nothing you
-        can do wrong by working with this mate.
-      </p>
+      <p className="p1 clientreview">{review}</p>
     </div>
   );
 };

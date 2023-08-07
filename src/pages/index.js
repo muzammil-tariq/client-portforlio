@@ -6,21 +6,35 @@ import Portfolio from '@/Component/Portfolio/Portfolio'
 import Services from '@/Component/Services/Services'
 import ServicesSlides from '@/Component/ServicesSlides/ServicesSlides'
 import SkillsTab from '@/Component/SkillsTab/SkillsTab'
+import { Element } from 'react-scroll'
 
 
 export default function Home() {
   return (
     <>
 
-
       <Header />
-      <HeroSection />
-      <ServicesSlides />
-      <Services />
-      <Portfolio />
-      <Experties />
+      <Element name='home'>
+        <HeroSection />
+      </Element>
 
-      <ContactForm />
+      <ServicesSlides />
+
+      <Element name="services">
+        <Services />
+      </Element>
+      <Element name="portfolio">
+
+        <Portfolio />
+      </Element>
+      <Element name="Expertise">
+
+        <Experties />
+      </Element>
+      <Element name="contact">
+
+        <ContactForm />
+      </Element>
 
 
 

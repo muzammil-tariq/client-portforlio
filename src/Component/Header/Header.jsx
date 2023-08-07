@@ -12,45 +12,81 @@ import { FiSearch } from "react-icons/fi";
 import { RiMenu3Line } from "react-icons/ri";
 import { useRouter } from "next/router";
 import { RxCross2 } from "react-icons/rx";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import whatsapp from "@/assets/images/whatsapp.svg";
 import { BsWhatsapp } from "react-icons/bs";
+import { Link } from "react-scroll";
 
-function Header() {
-  const phoneNumber = "03056256473";
+function Header({ admin }) {
+  const [scrollY, setScrollY] = useState(0);
+  const phoneNumber = "+923056256473";
   const message = "Hello";
-  
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+  };
 
   // Construct  the WhatsApp URL
   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
     message
   )}`;
   const router = useRouter();
-  const [currentIndex, setcurrentIndex] = useState(0);
-  console.log(router);
+  const [currentIndex, setcurrentIndex] = useState(null);
+
   const navigation = [
     {
       name: "Home",
-      path: "/",
+      path: "home",
     },
     {
       name: "services",
-      path: "/#services",
+      path: "services",
     },
     {
       name: "Portfolio",
-      path: "/#portfolio",
+      path: "portfolio",
     },
     {
       name: "Expertise",
-      path: "/#Expertise",
+      path: "Expertise",
     },
     {
       name: "contact",
-      path: "/#contact",
+      path: "contact",
     },
   ];
+  const adminNavigation = [
+    {
+      name: "website",
+      path: "/admin/web-dev/view",
+    },
+    {
+      name: "Mobile",
+      path: "/admin/mob-dev/view",
+    },
+    {
+      name: "UiUx",
+      path: "/admin/ui-ux/view",
+    },
+    {
+      name: "Presentation",
+      path: "/admin/presentation/view",
+    },
+    {
+      name: "Client",
+      path: "/admin/testimonial/view",
+    },
+  ];
+  useEffect(() => {
+    // Attach the scroll event listener
+    console.log("scrollY", scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      // Detach the scroll event listener when the component unmounts
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <Navbar
@@ -59,7 +95,7 @@ function Header() {
         sticky="top"
       >
         <Container className="container-padding">
-          <Navbar.Brand className="p-0" href="#">
+          <Navbar.Brand className="p-0" href="/">
             {/* <Image priority={false} src={logo} className="logo"></Image> */}
             <img src={logo.src} className="logo" />
           </Navbar.Brand>
@@ -79,37 +115,70 @@ function Header() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-center flex-grow-1 pe-3  nav-link-wrapper">
-                {navigation.map((item, ind) => {
-                  return (
-                    <Nav.Link
-                      onClick={() => setcurrentIndex(ind)}
-                      className={` header-link ${
-                        ind == currentIndex ? "active" : ""
-                      }`}
-                      key={ind}
-                      // className={`${
-                      //   router.pathname == item.path
-                      //     ? " header-link active-nav-link"
-                      //     : "header-link"
-                      // }  `}
-                      href={item.path}
-                    >
-                      {item.name}
-                    </Nav.Link>
-                  );
-                })}
+                {admin ? (
+                  adminNavigation.map((item, ind) => {
+                    return (
+                      <Nav.Link
+                        onClick={() => setcurrentIndex(ind)}
+                        className={` header-link ${
+                          router.pathname == item.path ? "active" : ""
+                        }`}
+                        key={ind}
+                        // className={`${
+                        //   router.pathname == item.path
+                        //     ? " header-link active-nav-link"
+                        //     : "header-link"
+                        // }  `}
+                        href={item.path}
+                      >
+                        {item.name}
+                      </Nav.Link>
+                    );
+                  })
+                ) : (
+                  <>
+                    {navigation?.map((item, ind) => {
+                      return (
+                        <Link
+                          spy={true}
+                          smooth={true}
+                          duration={500}
+                          // onClick={() => setcurrentIndex(ind)}
+                          className={` header-link ${
+                            admin && router.pathname == item.path
+                              ? "active-nav-link"
+                              : !admin && ind == currentIndex
+                              ? "active"
+                              : ""
+                          }`}
+                          key={ind}
+                          href={item.path}
+                          to={item.path}
+                        >
+                          {item.name}
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
               </Nav>
-              <div className="header-search-box ">
-                {/* <img src={whatsapp.src} style={{width:'37px'}} alt="" /> */}
-                <button onClick={()=>router.push(whatsappURL)} className="searchbtn">
-                  <BsWhatsapp
-                    style={{
-                      fontSize: "23px",
-                      color: "#fff",
-                    }}
-                  />
-                </button>
-              </div>
+              {admin ? null : (
+                <div className="header-search-box ">
+                  <button
+                    onClick={() => router.push(whatsappURL)}
+                    className="outlinebtn1"
+                    style={{ width: "97px", height: "39px" }}
+                  >
+                    Hire Us
+                    {/* <BsWhatsapp
+                      style={{
+                        fontSize: "23px",
+                        color: "#fff",
+                      }}
+                    /> */}
+                  </button>
+                </div>
+              )}
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>

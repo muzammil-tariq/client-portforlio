@@ -137,7 +137,7 @@ const ContactForm = () => {
               <p className="p1"> connect with our lead today</p>
             </div>
             <div className="contact-icon">
-              <Link href={"/"}>
+              <Link href={"https://meet.google.com/?hs=197&authuser=0"}>
                 <img src={whatsapp.src} alt="" />
               </Link>
               <Link href={"/"}>
@@ -213,7 +213,7 @@ const ContactForm = () => {
               className="inputStyle height  "
             ></textarea>
             <button className="outlinebtn1" onClick={handleSend}>
-              {loading ? <Loader /> : "Lets Talk"}
+              {loading ? <Loader /> : "Send"}
             </button>
           </div>
         </motion.div>
@@ -222,7 +222,7 @@ const ContactForm = () => {
       <div className="footer">
         <img src={logo.src} />
         <p className="p1">
-          © 2023 TxLabz LLC All right reserved DevPixelSolutions
+          © 2023 All right reserved DevPixelSolutions
         </p>
       </div>
     </div>

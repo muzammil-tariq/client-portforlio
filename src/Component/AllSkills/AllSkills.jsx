@@ -54,7 +54,7 @@ const AllSkills = ({ development, presentation, uiux }) => {
       {presentation ? (
         <>
           <SkillBox title={"keynote"} icon={keynote} />
-          <SkillBox title={"Microsoft_Pow erPoint_Logo"} icon={pp} />
+          <SkillBox title={"Microsoft_Pow"} icon={pp} />
           <SkillBox title={"google slides"} icon={googleSlides} />
           <SkillBox title={"Panda Doc"} icon={PandaDoc} />
         </>

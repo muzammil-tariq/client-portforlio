@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TopHeading from "../TopHeading/TopHeading";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import client from "@/assets/images/client.svg";
@@ -10,11 +10,19 @@ import rightArrow from "@/assets/images/rightArrow.svg";
 import leftArrow from "@/assets/images/leftArrow.svg";
 import { motion } from "framer-motion";
 import useInViewAnimation from "@/Hooks/useInViewAnimation";
+import { useDispatch, useSelector } from "react-redux";
+import { testimonailDispatch } from "@/store/action";
 
 const Testimonial = () => {
+  const testimonialState = useSelector(
+    (state) => state && state.testmonialReducer.testimonial
+  );
   const ref = useRef();
   const SliderRef = useRef();
   const { elementRef, mainControls } = useInViewAnimation();
+  const [activeSlide, setActiveSlide] = useState(0);
+  const remainingSlides =  (testimonialState?.length +1) - (activeSlide + 3);
+  console.log(remainingSlides);
 
   const settings = {
     dots: false,
@@ -22,8 +30,10 @@ const Testimonial = () => {
     arrows: false,
     speed: 1500,
     slidesToShow: 3,
-
-    slidesToScroll: 1,
+    slidesToScroll: 3,
+    afterChange: (currentSlide) => {
+      setActiveSlide(currentSlide); // Update the active slide index
+    },
     autoplay: false,
     autoplaySpeed: 3000,
     responsive: [
@@ -80,6 +90,11 @@ const Testimonial = () => {
       userPic: client,
     },
   ];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(testimonailDispatch());
+  }, []);
   return (
     <div id="testmonial">
       <TopHeading
@@ -105,22 +120,32 @@ const Testimonial = () => {
           ref={elementRef}
         >
           <Slider ref={SliderRef} {...settings}>
-            {testimonila.map((item, ind) => {
-              return (
-                <div key={ind} className="slide-gap">
-                  <ReviewCard userPic={item.userPic} />
-                </div>
-              );
-            })}
+            {testimonialState &&
+              testimonialState?.map((item, ind) => {
+                return (
+                  <div key={ind} className="slide-gap">
+                    <ReviewCard
+                      name={item.clientName}
+                      county={item.county}
+                      countyPic={item.countyPic}
+                      review={item.review}
+                      star={item.star}
+                      userPic={item.clientPic}
+                    />
+                  </div>
+                );
+              })}
           </Slider>
         </motion.div>
         <div className="arrowBox">
           <button onClick={handlePrev} className="outlinebtn1">
-            <img  src={leftArrow.src} alt="" />
+            <img src={leftArrow.src} alt="" />
           </button>
-          <p className="p3">3/6</p>
+          <p className="p3">
+            { Math.abs( remainingSlides) ?? ""}/{testimonialState?.length}
+          </p>
           <button onClick={handleNext} className="outlinebtn1">
-            <img  src={rightArrow.src} alt="" />
+            <img src={rightArrow.src} alt="" />
           </button>
         </div>
       </div>

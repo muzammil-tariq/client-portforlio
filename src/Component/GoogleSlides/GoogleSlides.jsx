@@ -5,11 +5,16 @@ import PortfolioCard from "../PortfolioCrad/PortfolioCard";
 import portfolio1 from "@/assets/images/portfolio1.svg";
 import { motion } from "framer-motion";
 import useInViewAnimation from "@/Hooks/useInViewAnimation";
+import { presentationDispatch } from "@/store/action";
+import { useDispatch, useSelector } from "react-redux";
 
-const GoogleSlides = () => {
+const GoogleSlides = ({type}) => {
+  console.log("type", type)
   const ref = useRef();
   const cardRef = useRef();
-
+  const PresetationState = useSelector(
+    (state) => state && state.presetatIonReducer.presentation
+  );
   const portfolio = [
     {
       tittle: "Mobile app development",
@@ -34,38 +39,31 @@ const GoogleSlides = () => {
   ];
   const { elementRef, mainControls } = useInViewAnimation();
 
-  
+  const itemsPerRow = 2;
+  const numRows = Math.ceil(PresetationState?.length / itemsPerRow);
+
   return (
     <div className="googleSlides">
-      <div className="portfolio-row">
-        {portfolio.slice(0, 2).map((item, ind) => {
-          return (
-            <div key={ind}>
-              <PortfolioCard
-              bluecolor={"bg-blue"}
-                tittle={item.tittle}
-                year={item.year}
-                image={item.image}
-              />
-            </div>
-          );
-        })}
-      </div>
-      <div className="portfolio-row prot-row-spacing">
-        {portfolio.slice(2, 4).map((item, ind) => {
-          return (
-            <div key={ind}>
-              <PortfolioCard
-              bluecolor={"bg-blue"}
-
-                tittle={item.tittle}
-                year={item.year}
-                image={item.image}
-              />
-            </div>
-          );
-        })}
-      </div>
+      {Array.from({ length: numRows }, (_, rowIndex) => (
+        <div className="portfolio-row" key={rowIndex}>
+          {PresetationState &&
+            PresetationState.slice(
+              rowIndex * itemsPerRow,
+              (rowIndex + 1) * itemsPerRow
+            ).map((item, ind) => (
+              <div key={ind} className="portfolio-card">
+                <PortfolioCard
+                  likeCount={item.likeCount}
+                  views={item.views}
+                  bluecolor={"bg-blue"}
+                  tittle={item.tittle}
+                  year={item.year}
+                  image={item.webImage}
+                />
+              </div>
+            ))}
+        </div>
+      ))}
     </div>
   );
 };
